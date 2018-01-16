@@ -9,7 +9,7 @@ public class Graph
    private ArrayList<Edge>[] adj;
    private final int V;
    int E;
-@SuppressWarnings("unchecked")
+
    public Graph(int N)
 	 {
 		this.V = N;
@@ -17,7 +17,6 @@ public class Graph
 		 adj = (ArrayList<Edge>[]) new ArrayList[N];
 		for (int v= 0; v < N; v++)
 		  adj[v] = new ArrayList<Edge>();
-		
 	 }
 
    public int vertices()
@@ -57,8 +56,7 @@ public class Graph
             }
         return list;
     }
-   
-   
+
    public void writeFile(String s)
 	 {
 		try

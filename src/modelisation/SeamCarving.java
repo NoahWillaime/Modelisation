@@ -119,7 +119,32 @@ public class SeamCarving
 		return g;
 	}
 
-	public static void Dijkstra(Graph g, int s, int t){
+	public static int[][] toTab(ArrayList<Edge> path, int[][] itr){
+		int hauteur = itr.length;
+		int largeur = itr[0].length-1;
+		int[][] new_itr = new int[hauteur][largeur];
+		int compt = 0;
+		int index = hauteur;
+		int cellule;
+		int x, y;
+		for (int i = 0; i < hauteur; i++){
+			y = i;
+			cellule = path.get(index).to;
+			for (int j = 0; j < largeur; j++){
+				x = j;
+				if (j < cellule-compt-1) {
+					new_itr[i][j] = itr[y][x];
+				} else {
+					new_itr[i][j] = itr[y][x+1];
+				}
+			}
+			compt += largeur+1;
+			index--;
+		}
+		return new_itr;
+	}
+
+	public static ArrayList<Edge> Dijkstra(Graph g, int s, int t){
 		int key;
 		int cost;
 		boolean[] visited = new boolean[g.vertices()];
@@ -142,14 +167,11 @@ public class SeamCarving
 			}
 		}
 		int cellule = t;
-		int x;
-		int size = 0;
+		ArrayList<Edge> path = new ArrayList<>();
 		while (cellule != s){
-			x = cellule;
-			size++;
-			System.out.print(chemin[x].from+" / "+chemin[x].to+" / "+chemin[x].cost + "\n");
-			cellule = chemin[x].from;
+			path.add(chemin[cellule]);
+			cellule = chemin[cellule].from;
 		}
-		System.out.println("TAILLE : "+size);
+		return path;
 	}
 }

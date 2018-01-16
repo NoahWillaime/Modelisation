@@ -1,6 +1,7 @@
 package modelisation;
 
 import java.time.Clock;
+import java.util.ArrayList;
 import java.util.Timer;
 
 class Test
@@ -78,17 +79,20 @@ class Test
 		 tab[2][2] = 25;
 		 tab[2][3] = 0;
 		 int[][] interet = SeamCarving.interest(image);
-		 /*for (int i = 0; i < interet.length; i++){
-		 	for (int j = 0; j < interet[i].length; j++){
-		 		System.out.print(interet[i][j]+ " ");
-			}
-			System.out.print('\n');
-		 }*/
-		 Graph g = SeamCarving.tograph(interet);
-		 g.writeFile("test");
+		 Graph g;
+		// g.writeFile("test");
+         ArrayList<Edge> test;
 		 long time = Clock.systemUTC().millis();
-		 SeamCarving.Dijkstra(g, 0, g.vertices()-1);
-		 System.out.println("HAUTEUR : "+image.length);
+         for (int i = 0; i < 50; i++) {
+             g = SeamCarving.tograph(interet);
+             test = SeamCarving.Dijkstra(g, 0, g.vertices() - 1);
+             image = SeamCarving.toTab(test, image);
+             interet = SeamCarving.interest(image);
+         }
+         SeamCarving.writepgm(image, "TEST.pgm");
+		 /*for (Edge e : test){
+		 	System.out.println("FROM : "+e.from+" / TO : "+e.to);
+		 }*/
 		 System.out.println("TIME : "+(Clock.systemUTC().millis()-time));
 		 //testHeap();
 		//testGraph();
