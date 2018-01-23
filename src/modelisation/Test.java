@@ -82,18 +82,22 @@ class Test
 		 Graph g;
 		// g.writeFile("test");
          ArrayList<Edge> test;
-		 long time = Clock.systemUTC().millis();
+         long time = Clock.systemUTC().millis();
+
          for (int i = 0; i < 50; i++) {
              g = SeamCarving.tograph(interet);
-             test = SeamCarving.Dijkstra(g, 0, g.vertices() - 1);
-             image = SeamCarving.toTab(test, image);
+
+			 test = SeamCarving.Dijkstra(g, 0, g.vertices() - 1);
+
+			 image = SeamCarving.toTab(test, image);
              interet = SeamCarving.interest(image);
          }
          SeamCarving.writepgm(image, "TEST.pgm");
+         System.out.println("TIME : "+(Clock.systemUTC().millis()-time));
+
 		 /*for (Edge e : test){
 		 	System.out.println("FROM : "+e.from+" / TO : "+e.to);
 		 }*/
-		 System.out.println("TIME : "+(Clock.systemUTC().millis()-time));
 		 //testHeap();
 		//testGraph();
 	 }

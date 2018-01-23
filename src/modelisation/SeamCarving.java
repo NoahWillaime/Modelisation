@@ -148,8 +148,6 @@ public class SeamCarving
 		int key;
 		int cost;
 		boolean[] visited = new boolean[g.vertices()];
-		for (int i = 0; i < visited.length; i++)
-			visited[i] = false;
 		Edge[] chemin = new Edge[g.vertices()];
 		Heap heap = new Heap(g.vertices());
 		heap.decreaseKey(0, 0);
@@ -161,7 +159,7 @@ public class SeamCarving
 					cost = heap.priority(key) + e.cost;
 					if (cost < heap.priority(e.to)) {
 						heap.decreaseKey(e.to, cost);
-							chemin[e.to] = e;
+						chemin[e.to] = e;
 					}
 				}
 			}
